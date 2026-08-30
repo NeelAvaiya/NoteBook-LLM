@@ -17,13 +17,18 @@
     "@prisma/adapter-pg": "^6.19.3",
     "@prisma/client": "^6.19.3",
     "better-auth": "^1.7.2",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "multer": "^2.3.0",
     "pg": "^8.23.0",
-    "prisma": "^6.19.3"
+    "prisma": "^6.19.3",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/multer": "^2.2.0",
     "@types/node": "^26.4.0",
     "@types/pg": "^8.23.1",
     "tsx": "^4.23.13",
