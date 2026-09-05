@@ -36,7 +36,7 @@ export async function retrieveWorkspaceContext(workspaceId, query) {
 }
 export function buildChatSystemPrompt(input) {
     const sections = [
-        "You are Chaibook, an assistant that helps users learn from their workspace sources.",
+        "You are NoteBookLLM, an assistant that helps users learn from their workspace sources.",
     ];
     if (input.webSearchEnabled) {
         sections.push("You have access to a web_search tool for up-to-date information outside the workspace.", "Use it when the user asks about recent events or topics not covered by their sources.", "Cite web results inline using [W1], [W2], etc. matching the web result blocks.");

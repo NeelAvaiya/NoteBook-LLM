@@ -9,14 +9,22 @@ import { inngest } from "./inngest/client.js";
 import { serve } from "inngest/express";
 import {functions} from "./inngest/index.js"
 const app = express();
-const PORT = process.env.PORT;
-const clientUrl = process.env.CLIENT_URL ?? "http://localhost:3001";
-
+const PORT = process.env.PORT ?? 8081;
+const clientUrl = process.env.CLIENT_URL ?? "http://localhost:3000";
+const allowedOrigins = [clientUrl, "http://localhost:3001", "http://localhost:3000"];
 
 app.use(
     cors({
-        origin: clientUrl,
+        origin: (origin, callback) => {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+                return;
+            }
+
+            callback(new Error(`CORS blocked for origin: ${origin}`));
+        },
         credentials: true,
+        exposedHeaders: ["x-conversation-id", "X-Conversation-Id"],
     }),
 );
 
@@ -28,6 +36,16 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
     res.send("Hello World");
+});
+
+app.get("/favicon.ico", (_req, res) => {
+    res.type("image/svg+xml");
+    res.send(`
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+            <rect width="64" height="64" rx="14" fill="#7c3aed"/>
+            <path d="M18 42h28v6H18zm4-20h20v6H22zm-4-8h28v6H18z" fill="#fff"/>
+        </svg>
+    `);
 });
 
 app.get("/health", (_req, res) => {

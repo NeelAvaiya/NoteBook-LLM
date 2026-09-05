@@ -72,7 +72,7 @@ export function buildChatSystemPrompt(input: {
     webSearchEnabled?: boolean;
 }) {
     const sections: string[] = [
-        "You are Chaibook, an assistant that helps users learn from their workspace sources.",
+        "You are NoteBookLLM, an assistant that helps users learn from their workspace sources.",
     ];
 
     if (input.webSearchEnabled) {
@@ -112,9 +112,8 @@ export function buildChatSystemPrompt(input: {
 
     const context = input.chunks
         .map((chunk, index) => {
-            const label = `[${index + 1}] ${chunk.sourceTitle} (${chunk.sourceType})${
-                chunk.page ? `, page ${chunk.page}` : ""
-            }`;
+            const label = `[${index + 1}] ${chunk.sourceTitle} (${chunk.sourceType})${chunk.page ? `, page ${chunk.page}` : ""
+                }`;
             return `${label}\n${chunk.text}`;
         })
         .join("\n\n");
